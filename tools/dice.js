@@ -4,7 +4,7 @@ export function init() {
   var diceRollBtn = document.getElementById('dice-roll-btn');
   var diceResults = document.getElementById('dice-results');
   var diceSum = document.getElementById('dice-sum');
-  var diceSides = 4;
+  var diceSides = 6;
   var diceCount = 1;
 
   function setupSegRow(row, callback) {
