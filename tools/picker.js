@@ -99,5 +99,57 @@ export function init() {
     }
   });
 
+  var setupView = document.getElementById('picker-setup-view');
+  var randomView = document.getElementById('picker-random-view');
+  var randomShuffle = document.getElementById('picker-random-shuffle');
+  var randomRollBtn = document.getElementById('picker-random-roll-btn');
+  var randomBackBtn = document.getElementById('picker-random-back-btn');
+
+  function showView(view) {
+    setupView.classList.add('picker-hidden');
+    randomView.classList.add('picker-hidden');
+    document.getElementById('picker-narrow-view').classList.add('picker-hidden');
+    document.getElementById('picker-winner-view').classList.add('picker-hidden');
+    view.classList.remove('picker-hidden');
+  }
+
+  function rollRandom() {
+    if (options.length === 0) return;
+    randomRollBtn.disabled = true;
+    randomBackBtn.disabled = true;
+    randomShuffle.classList.add('picker-shuffle-active');
+
+    var duration = 600;
+    var intervalTime = 60;
+    var timer = 0;
+
+    var rollInterval = setInterval(function () {
+      var randOpt = options[Math.floor(Math.random() * options.length)];
+      randomShuffle.textContent = randOpt;
+      timer += intervalTime;
+      if (timer >= duration) {
+        clearInterval(rollInterval);
+        var finalWinner = options[Math.floor(Math.random() * options.length)];
+        randomShuffle.textContent = finalWinner;
+        randomShuffle.classList.remove('picker-shuffle-active');
+        randomRollBtn.disabled = false;
+        randomBackBtn.disabled = false;
+      }
+    }, intervalTime);
+  }
+
+  randomStartBtn.addEventListener('click', function () {
+    showView(randomView);
+    rollRandom();
+  });
+
+  randomRollBtn.addEventListener('click', function () {
+    rollRandom();
+  });
+
+  randomBackBtn.addEventListener('click', function () {
+    showView(setupView);
+  });
+
   window.getPickerOptions = function() { return options; }; // for testing/integration
 }
