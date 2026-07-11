@@ -1,20 +1,24 @@
-var CACHE_NAME = 'quickutils-v2';
+var CACHE_NAME = 'quickutils-v3';
 var ASSETS = [
-  '/',
-  '/index.html',
-  '/style.css',
-  '/app.js',
-  '/manifest.json',
-  '/icons/icon-192.png',
-  '/icons/icon-512.png',
-  '/tools/coin.js',
-  '/tools/coin.css',
-  '/tools/dice.js',
-  '/tools/dice.css',
-  '/tools/number.js',
-  '/tools/number.css',
-  '/tools/password.js',
-  '/tools/password.css'
+  './',
+  'index.html',
+  'style.css',
+  'app.js',
+  'manifest.json',
+  'pwa-install.js',
+  'pwa-install.css',
+  'icons/icon-192.png',
+  'icons/icon-512.png',
+  'tools/coin.js',
+  'tools/coin.css',
+  'tools/dice.js',
+  'tools/dice.css',
+  'tools/number.js',
+  'tools/number.css',
+  'tools/password.js',
+  'tools/password.css',
+  'tools/picker.js',
+  'tools/picker.css'
 ];
 
 self.addEventListener('install', function (e) {
