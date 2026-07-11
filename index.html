@@ -88,7 +88,47 @@
 
       <!-- Password Generator -->
       <section id="password" class="tool-section" aria-label="Password Generator">
-        <!-- Populated in Task 5 -->
+        <h1 class="tool-title">Password Generator</h1>
+
+        <div class="password-display">
+          <output id="pass-output" class="pass-output">Tap Generate</output>
+          <button id="pass-copy-btn" class="pass-copy-btn" aria-label="Copy password" title="Copy">
+            📋
+          </button>
+        </div>
+
+        <div class="password-controls">
+          <div class="slider-row">
+            <label for="pass-length" class="control-label">Length: <span id="pass-length-val">16</span></label>
+            <input id="pass-length" type="range" min="8" max="64" value="16" class="pass-slider">
+          </div>
+
+          <div class="toggle-group">
+            <label class="toggle-row">
+              <span>Uppercase (A–Z)</span>
+              <input type="checkbox" id="pass-upper" checked>
+              <span class="toggle-switch"></span>
+            </label>
+            <label class="toggle-row">
+              <span>Lowercase (a–z)</span>
+              <input type="checkbox" id="pass-lower" checked>
+              <span class="toggle-switch"></span>
+            </label>
+            <label class="toggle-row">
+              <span>Numbers (0–9)</span>
+              <input type="checkbox" id="pass-numbers" checked>
+              <span class="toggle-switch"></span>
+            </label>
+            <label class="toggle-row">
+              <span>Symbols (!@#$...)</span>
+              <input type="checkbox" id="pass-symbols" checked>
+              <span class="toggle-switch"></span>
+            </label>
+          </div>
+        </div>
+
+        <button id="pass-generate-btn" class="btn-primary password-btn">Generate</button>
+        <p id="pass-feedback" class="pass-feedback" aria-live="polite"></p>
       </section>
     </main>
 
