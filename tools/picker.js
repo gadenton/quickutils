@@ -151,5 +151,116 @@ export function init() {
     showView(setupView);
   });
 
+  var narrowView = document.getElementById('picker-narrow-view');
+  var narrowPlayerTurn = document.getElementById('picker-narrow-player-turn');
+  var narrowInstructions = document.getElementById('picker-narrow-instructions');
+  var narrowCards = document.getElementById('picker-narrow-cards');
+  var narrowConfirmBtn = document.getElementById('picker-narrow-confirm-btn');
+  var narrowCancelBtn = document.getElementById('picker-narrow-cancel-btn');
+  
+  var winnerView = document.getElementById('picker-winner-view');
+  var winnerResult = document.getElementById('picker-winner-result');
+  var winnerBackBtn = document.getElementById('picker-winner-back-btn');
+
+  var narrowState = {
+    pool: [],
+    targetKeep: 0,
+    player: 1,
+    selectedIndices: []
+  };
+
+  narrowStartBtn.addEventListener('click', function () {
+    startNarrowing();
+  });
+
+  narrowCancelBtn.addEventListener('click', function () {
+    showView(setupView);
+  });
+
+  winnerBackBtn.addEventListener('click', function () {
+    showView(setupView);
+  });
+
+  function startNarrowing() {
+    narrowState.pool = options.slice();
+    narrowState.player = 1;
+    setupNarrowStep();
+    showView(narrowView);
+  }
+
+  function setupNarrowStep() {
+    var poolSize = narrowState.pool.length;
+    narrowState.selectedIndices = [];
+    narrowConfirmBtn.disabled = true;
+
+    if (poolSize >= 4) {
+      narrowState.targetKeep = 3;
+    } else if (poolSize === 3) {
+      narrowState.targetKeep = 2;
+    } else if (poolSize === 2) {
+      narrowState.targetKeep = 1;
+    } else {
+      // 1 option left - should not happen as we catch it earlier, but handle gracefully
+      declareWinner(narrowState.pool[0]);
+      return;
+    }
+
+    narrowPlayerTurn.textContent = 'Player ' + narrowState.player + '\'s Turn';
+    narrowInstructions.textContent = 'Keep exactly ' + narrowState.targetKeep + ' of ' + poolSize + ' items';
+    renderNarrowCards();
+  }
+
+  function renderNarrowCards() {
+    narrowCards.innerHTML = '';
+    narrowState.pool.forEach(function (item, idx) {
+      var card = document.createElement('div');
+      card.className = 'picker-card';
+      card.textContent = item;
+      
+      card.addEventListener('click', function () {
+        toggleCardSelection(idx, card);
+      });
+
+      narrowCards.appendChild(card);
+    });
+  }
+
+  function toggleCardSelection(index, cardEl) {
+    var selectIdx = narrowState.selectedIndices.indexOf(index);
+    if (selectIdx > -1) {
+      narrowState.selectedIndices.splice(selectIdx, 1);
+      cardEl.classList.remove('selected');
+    } else {
+      // Allow selecting up to targetKeep
+      if (narrowState.selectedIndices.length < narrowState.targetKeep) {
+        narrowState.selectedIndices.push(index);
+        cardEl.classList.add('selected');
+      }
+    }
+    narrowConfirmBtn.disabled = (narrowState.selectedIndices.length !== narrowState.targetKeep);
+  }
+
+  narrowConfirmBtn.addEventListener('click', function () {
+    // Narrow pool to only selected indices
+    var newPool = [];
+    narrowState.selectedIndices.forEach(function (idx) {
+      newPool.push(narrowState.pool[idx]);
+    });
+    narrowState.pool = newPool;
+
+    if (narrowState.pool.length <= 1) {
+      declareWinner(narrowState.pool[0]);
+    } else {
+      // Alternate players: 1 -> 2, 2 -> 1
+      narrowState.player = narrowState.player === 1 ? 2 : 1;
+      setupNarrowStep();
+    }
+  });
+
+  function declareWinner(winner) {
+    winnerResult.textContent = winner;
+    showView(winnerView);
+  }
+
   window.getPickerOptions = function() { return options; }; // for testing/integration
 }
