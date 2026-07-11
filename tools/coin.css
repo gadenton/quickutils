@@ -60,3 +60,45 @@
   50% { transform: rotateY(900deg) translateY(-90px); }
   100% { transform: rotateY(1980deg) translateY(0); }
 }
+
+.coin-stats {
+  display: flex;
+  gap: 16px;
+  width: 100%;
+  max-width: 320px;
+  margin-top: 16px;
+}
+
+.stat-col {
+  flex: 1;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+}
+
+.stat-title {
+  font-size: 14px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 4px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.stat-row:last-child {
+  margin-bottom: 0;
+  margin-top: 6px;
+  font-weight: 600;
+}
