@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#6e5adc">
+  <meta name="description" content="Flip coins, roll dice, generate random numbers and passwords — fast, offline, no tracking.">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>QuickUtils</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app">
+    <main>
+      <!-- Coin Flip -->
+      <section id="coin" class="tool-section active" aria-label="Coin Flip">
+        <!-- Populated in Task 2 -->
+      </section>
+
+      <!-- Dice Roller -->
+      <section id="dice" class="tool-section" aria-label="Dice Roller">
+        <!-- Populated in Task 3 -->
+      </section>
+
+      <!-- Random Number -->
+      <section id="number" class="tool-section" aria-label="Random Number">
+        <!-- Populated in Task 4 -->
+      </section>
+
+      <!-- Password Generator -->
+      <section id="password" class="tool-section" aria-label="Password Generator">
+        <!-- Populated in Task 5 -->
+      </section>
+    </main>
+
+    <nav class="tab-bar" aria-label="Tool navigation">
+      <button class="active" data-tab="coin" aria-current="page">
+        <span class="tab-icon">🪙</span>
+        <span>Coin</span>
+      </button>
+      <button data-tab="dice">
+        <span class="tab-icon">🎲</span>
+        <span>Dice</span>
+      </button>
+      <button data-tab="number">
+        <span class="tab-icon">🔢</span>
+        <span>Number</span>
+      </button>
+      <button data-tab="password">
+        <span class="tab-icon">🔑</span>
+        <span>Password</span>
+      </button>
+    </nav>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
