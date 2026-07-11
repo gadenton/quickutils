@@ -70,4 +70,28 @@ import * as picker from './tools/picker.js';
       console.warn('SW registration failed:', err);
     });
   }
+
+  // --- Theme-color sync (Chrome Android PWA workaround) ---
+  // Chrome Android doesn't re-evaluate media queries on <meta name="theme-color">
+  // when switching back from dark to light in standalone mode. It also ignores
+  // attribute mutations on existing meta tags. Fix: collapse to a single meta tag
+  // with no media attribute, and remove + re-insert it on scheme change to force
+  // Chrome to pick up the new value. Color is read from the --bg CSS variable.
+  (function () {
+    var metas = document.querySelectorAll('meta[name="theme-color"]');
+    metas.forEach(function (m) { m.remove(); });
+
+    function applyThemeColor() {
+      var existing = document.querySelector('meta[name="theme-color"]');
+      if (existing) existing.remove();
+
+      var meta = document.createElement('meta');
+      meta.name = 'theme-color';
+      meta.content = getComputedStyle(document.documentElement).getPropertyValue('--bg').trim();
+      document.head.appendChild(meta);
+    }
+
+    applyThemeColor();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyThemeColor);
+  })();
 })();
