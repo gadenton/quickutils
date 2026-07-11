@@ -30,7 +30,7 @@ export function init() {
   });
 
   function updateButtons() {
-    randomStartBtn.disabled = options.length < 1;
+    randomStartBtn.disabled = options.length < 2;
     eliminateStartBtn.disabled = options.length < 2;
   }
 
@@ -39,7 +39,7 @@ export function init() {
     options.forEach(function (opt, idx) {
       var tag = document.createElement('div');
       tag.className = 'picker-tag';
-      
+
       var text = document.createElement('span');
       text.textContent = opt;
       tag.appendChild(text);
@@ -159,7 +159,7 @@ export function init() {
   var eliminateCards = document.getElementById('picker-eliminate-cards');
   var eliminateConfirmBtn = document.getElementById('picker-eliminate-confirm-btn');
   var eliminateCancelBtn = document.getElementById('picker-eliminate-cancel-btn');
-  
+
   var winnerView = document.getElementById('picker-winner-view');
   var winnerResult = document.getElementById('picker-winner-result');
   var winnerBackBtn = document.getElementById('picker-winner-back-btn');
@@ -213,7 +213,7 @@ export function init() {
       var card = document.createElement('div');
       card.className = 'picker-card';
       card.textContent = item;
-      
+
       card.addEventListener('click', function () {
         toggleCardSelection(idx, card);
       });
@@ -235,7 +235,7 @@ export function init() {
       } else {
         var oldIdx = eliminateState.selectedIndices[0];
         eliminateState.selectedIndices = [index];
-        
+
         var cards = eliminateCards.children;
         if (cards[oldIdx]) {
           cards[oldIdx].classList.remove('eliminated');
@@ -270,5 +270,5 @@ export function init() {
     showView(winnerView);
   }
 
-  window.getPickerOptions = function() { return options; }; // for testing/integration
+  window.getPickerOptions = function () { return options; }; // for testing/integration
 }
