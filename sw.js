@@ -1,4 +1,4 @@
-var CACHE_NAME = 'quickutils-v1';
+var CACHE_NAME = 'quickutils-v2';
 var ASSETS = [
   '/',
   '/index.html',
@@ -6,7 +6,15 @@ var ASSETS = [
   '/app.js',
   '/manifest.json',
   '/icons/icon-192.png',
-  '/icons/icon-512.png'
+  '/icons/icon-512.png',
+  '/tools/coin.js',
+  '/tools/coin.css',
+  '/tools/dice.js',
+  '/tools/dice.css',
+  '/tools/number.js',
+  '/tools/number.css',
+  '/tools/password.js',
+  '/tools/password.css'
 ];
 
 self.addEventListener('install', function (e) {
