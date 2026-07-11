@@ -21,10 +21,10 @@
 }
 
 .number-result {
-  font-size: 64px;
+  font-size: 72px;
   font-weight: 800;
   color: var(--number-accent);
-  min-height: 80px;
+  min-height: 90px;
   display: flex;
   align-items: center;
   justify-content: center;
