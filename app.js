@@ -21,6 +21,18 @@ import * as picker from './tools/picker.js';
     sections.forEach(function (section) {
       section.classList.toggle('active', section.id === tabName);
     });
+
+    if (tabName === 'picker') {
+      var listContainer = document.getElementById('picker-list-container');
+      var itemInput = document.getElementById('picker-item-input');
+      var textarea = document.getElementById('picker-textarea');
+      
+      if (listContainer && !listContainer.classList.contains('picker-hidden')) {
+        if (itemInput) itemInput.focus();
+      } else {
+        if (textarea) textarea.focus();
+      }
+    }
   }
 
   tabBar.addEventListener('click', function (e) {

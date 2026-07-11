@@ -18,6 +18,7 @@ export function init() {
     modeListBtn.classList.remove('active');
     pasteContainer.classList.remove('picker-hidden');
     listContainer.classList.add('picker-hidden');
+    textarea.focus();
   });
 
   modeListBtn.addEventListener('click', function () {
@@ -25,6 +26,7 @@ export function init() {
     modePasteBtn.classList.remove('active');
     listContainer.classList.remove('picker-hidden');
     pasteContainer.classList.add('picker-hidden');
+    itemInput.focus();
   });
 
   function updateButtons() {
