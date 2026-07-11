@@ -35,7 +35,34 @@
 
       <!-- Dice Roller -->
       <section id="dice" class="tool-section" aria-label="Dice Roller">
-        <!-- Populated in Task 3 -->
+        <h1 class="tool-title">Dice Roller</h1>
+
+        <div class="dice-controls">
+          <label class="control-label">Type</label>
+          <div class="seg-row" id="dice-type-row">
+            <button class="seg-btn active" data-sides="4">d4</button>
+            <button class="seg-btn" data-sides="6">d6</button>
+            <button class="seg-btn" data-sides="8">d8</button>
+            <button class="seg-btn" data-sides="10">d10</button>
+            <button class="seg-btn" data-sides="12">d12</button>
+            <button class="seg-btn" data-sides="20">d20</button>
+          </div>
+
+          <label class="control-label">Count</label>
+          <div class="seg-row" id="dice-count-row">
+            <button class="seg-btn active" data-count="1">1</button>
+            <button class="seg-btn" data-count="2">2</button>
+            <button class="seg-btn" data-count="3">3</button>
+            <button class="seg-btn" data-count="4">4</button>
+            <button class="seg-btn" data-count="5">5</button>
+            <button class="seg-btn" data-count="6">6</button>
+          </div>
+        </div>
+
+        <button id="dice-roll-btn" class="btn-primary dice-btn">Roll</button>
+
+        <div id="dice-results" class="dice-results" aria-live="polite"></div>
+        <p id="dice-sum" class="dice-sum" aria-live="polite"></p>
       </section>
 
       <!-- Random Number -->
