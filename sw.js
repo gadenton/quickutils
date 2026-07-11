@@ -1,4 +1,4 @@
-var CACHE_NAME = 'quickutils-v3';
+var CACHE_NAME = 'quickutils-20260710-231344';
 var ASSETS = [
   './',
   'index.html',
@@ -21,29 +21,42 @@ var ASSETS = [
   'tools/picker.css'
 ];
 
-self.addEventListener('install', function (e) {
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(ASSETS);
-    })
-  );
+self.addEventListener('install', (e) => {
+  e.waitUntil((async () => {
+    const cache = await caches.open(CACHE_NAME);
+    await cache.addAll(ASSETS);
+  })());
+  self.skipWaiting();
 });
 
-self.addEventListener('activate', function (e) {
-  e.waitUntil(
-    caches.keys().then(function (keys) {
-      return Promise.all(
-        keys.filter(function (k) { return k !== CACHE_NAME; })
-            .map(function (k) { return caches.delete(k); })
-      );
-    })
-  );
+self.addEventListener('activate', (e) => {
+  e.waitUntil((async () => {
+    const keys = await caches.keys();
+    await Promise.all(
+      keys
+        .filter((key) => key !== CACHE_NAME)
+        .map((key) => caches.delete(key))
+    );
+    await self.clients.claim();
+  })());
 });
 
-self.addEventListener('fetch', function (e) {
-  e.respondWith(
-    caches.match(e.request).then(function (cached) {
-      return cached || fetch(e.request);
-    })
-  );
+self.addEventListener('fetch', (e) => {
+  // Only intercept GET requests, and ignore non-http schemes (like extensions)
+  if (e.request.method !== 'GET' || !e.request.url.startsWith('http')) return;
+
+  e.respondWith((async () => {
+    try {
+      const response = await fetch(e.request);
+      if (response && response.status === 200) {
+        const responseToCache = response.clone();
+        const cache = await caches.open(CACHE_NAME);
+        await cache.put(e.request, responseToCache);
+      }
+      return response;
+    } catch (error) {
+      // If network fails (offline), serve the cached version
+      return caches.match(e.request);
+    }
+  })());
 });

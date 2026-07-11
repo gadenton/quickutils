@@ -24,6 +24,15 @@ For local development with a proper service worker, serve with any static file s
 npx serve .
 ```
 
+### Git Hooks Setup
+
+To automatically update the Service Worker cache version on every commit, enable the tracked git hooks after cloning:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+
 ## Deployment
 
 Push to GitHub and enable GitHub Pages from the `main` branch root.

@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# 1. Generate a new cache version name based on the current timestamp (YYYYMMDD-HHMMSS)
+NEW_VERSION="quickutils-$(date +%Y%m%d-%H%M%S)"
+
+# 2. Check if sw.js exists
+if [ -f sw.js ]; then
+  # 3. Update the CACHE_NAME line in sw.js using sed
+  # Handles the replacement in-place
+  sed -i.bak -E "s/var CACHE_NAME = '[^']*';/var CACHE_NAME = '$NEW_VERSION';/" sw.js
+  rm -f sw.js.bak
+  
+  # 4. Stage the updated sw.js file so it is included in the current commit
+  git add sw.js
+  echo "Pre-commit hook: Updated CACHE_NAME in sw.js to '$NEW_VERSION' and staged the file."
+fi
