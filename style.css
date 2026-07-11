@@ -5,6 +5,7 @@
 }
 
 :root {
+  color-scheme: dark light;
   --bg: #0f0f17;
   --bg-surface: #1a1a2e;
   --bg-elevated: #252540;
