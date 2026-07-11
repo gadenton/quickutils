@@ -1,24 +1,27 @@
 # QuickUtils
 
-A lightweight PWA for common utilities that LLM assistants can't do.
+A lightweight PWA for common utilities that LLM assistants can't easily perform.
 
-- 🪙 **Coin Flip** — tap to flip, animated result
-- 🎲 **Dice Roller** — d4 through d20, 1–6 dice
-- 🔢 **Random Number** — pick a range, get a number
-- 🔑 **Password Generator** — configurable length and character sets
+## Available Tools
+
+- 🔑 **Password Generator** — Configurable length (8–64 characters) and character sets (uppercase, lowercase, numbers, symbols), with one-tap copy.
+- 🎲 **Dice Roller** — Supports standard RPG dice (d4, d6, d8, d10, d12, d20) with configurable counts (1–6 dice).
+- 🪙 **Coin Flip** — Interactive animated coin flip with persistent session and lifetime stats.
+- 🔢 **Random Number** — Generate random integers within a customizable min/max range.
+- 🎯 **Picker & Narrowing** — Input options to either pick one at random or systematically narrow down choices using a 3-2-1 turn-based narrowing tournament.
 
 ## Features
 
-- Installable as a PWA on Android and iOS
-- Works offline
-- Respects system light/dark mode
-- No tracking, no analytics, no server
+- **PWA Capabilities**: Installable on Android, iOS, and desktop browsers with custom installation prompts.
+- **Offline First**: Runs completely offline using a local Service Worker cache.
+- **Dynamic Styling**: Respects system light/dark modes with CSS color-scheme adjustments.
+- **Privacy Oriented**: Runs 100% in the client. No analytics, tracking, cookies, or external server calls.
 
 ## Development
 
-Open `index.html` in a browser. No build step needed.
+Open `index.html` in any browser. No compilation or build steps are required.
 
-For local development with a proper service worker, serve with any static file server:
+To run locally with Service Worker caching enabled, serve the root directory with a local HTTP server:
 
 ```bash
 npx serve .
@@ -26,13 +29,12 @@ npx serve .
 
 ### Git Hooks Setup
 
-To automatically update the Service Worker cache version on every commit, enable the tracked git hooks after cloning:
+To automatically bump the Service Worker cache version on every commit, enable the repository's git hooks:
 
 ```bash
 git config core.hooksPath .githooks
 ```
 
-
 ## Deployment
 
-Push to GitHub and enable GitHub Pages from the `main` branch root.
+Push to GitHub and enable GitHub Pages pointing to the root of the `main` branch.
