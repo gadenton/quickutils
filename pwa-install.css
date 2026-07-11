@@ -1,0 +1,89 @@
+/* === Install Banner === */
+.install-banner {
+  position: fixed;
+  bottom: calc(60px + env(safe-area-inset-bottom));
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-bottom: none;
+  border-radius: 16px 16px 0 0;
+  padding: 12px 16px;
+  gap: 12px;
+  z-index: 99;
+  box-shadow: 0 -4px 12px var(--shadow);
+  animation: installSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.install-banner.hidden {
+  display: none;
+}
+
+.install-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+}
+
+.install-icon {
+  font-size: 24px;
+}
+
+.install-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.install-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.install-desc {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+.install-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.install-btn-close {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  transition: color 0.2s;
+}
+
+.install-btn-close:hover {
+  color: var(--text-primary);
+}
+
+.install-btn-action {
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  border-radius: 8px !important;
+}
+
+@keyframes installSlideUp {
+  from {
+    transform: translate(-50%, 100%);
+    opacity: 0;
+  }
+  to {
+    transform: translate(-50%, 0);
+    opacity: 1;
+  }
+}
