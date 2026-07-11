@@ -1,10 +1,12 @@
-var CACHE_NAME = 'quickutils-20260710-233043';
+var CACHE_NAME = 'quickutils-20260710-233410';
 var ASSETS = [
   './',
   'index.html',
   'style.css',
   'app.js',
   'manifest.json',
+  'pwa-install.js',
+  'pwa-install.css',
   'icons/icon-192.png',
   'icons/icon-512.png',
   'screenshots/screenshot-mobile.jpg',

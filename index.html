@@ -17,6 +17,7 @@
   <link rel="stylesheet" href="tools/number.css">
   <link rel="stylesheet" href="tools/password.css">
   <link rel="stylesheet" href="tools/picker.css">
+  <link rel="stylesheet" href="pwa-install.css">
 </head>
 <body>
   <div class="app">
@@ -203,6 +204,20 @@
       </section>
     </main>
 
+    <!-- PWA Install Banner -->
+    <div id="install-banner" class="install-banner hidden">
+      <div class="install-content">
+        <span class="install-icon">📲</span>
+        <div class="install-text">
+          <p class="install-title">Install QuickUtils</p>
+          <p class="install-desc">Add to home screen for offline access</p>
+        </div>
+      </div>
+      <div class="install-actions">
+        <button id="install-close-btn" class="install-btn-close" aria-label="Dismiss">✕</button>
+        <button id="install-confirm-btn" class="btn-primary install-btn-action">Install</button>
+      </div>
+    </div>
 
     <nav class="tab-bar" aria-label="Tool navigation">
       <button class="active" data-tab="coin" aria-current="page">
@@ -229,5 +244,6 @@
   </div>
 
   <script type="module" src="app.js"></script>
+  <script type="module" src="pwa-install.js"></script>
 </body>
 </html>
