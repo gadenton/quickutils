@@ -12,7 +12,9 @@ import * as picker from './tools/picker.js';
   var tabs = tabBar.querySelectorAll('button');
   var sections = document.querySelectorAll('.tool-section');
 
-  function switchTab(tabName) {
+  var validTabs = Array.from(tabs).map(function (btn) { return btn.dataset.tab; });
+
+  function switchTab(tabName, updateHash) {
     tabs.forEach(function (btn) {
       var isActive = btn.dataset.tab === tabName;
       btn.classList.toggle('active', isActive);
@@ -21,6 +23,10 @@ import * as picker from './tools/picker.js';
     sections.forEach(function (section) {
       section.classList.toggle('active', section.id === tabName);
     });
+
+    if (updateHash !== false) {
+      history.replaceState(null, '', '#' + tabName);
+    }
 
     if (tabName === 'picker') {
       var listContainer = document.getElementById('picker-list-container');
@@ -39,6 +45,17 @@ import * as picker from './tools/picker.js';
     var btn = e.target.closest('button[data-tab]');
     if (btn) switchTab(btn.dataset.tab);
   });
+
+  // Restore tab from URL fragment on load, or navigate via back/forward
+  function applyHash() {
+    var hash = location.hash.replace('#', '');
+    if (hash && validTabs.indexOf(hash) !== -1) {
+      switchTab(hash, false);
+    }
+  }
+
+  applyHash();
+  window.addEventListener('hashchange', applyHash);
 
   // --- Initialize Tools ---
   coin.init();
