@@ -323,6 +323,47 @@ main {
   min-height: 20px;
 }
 
+/* === Random Number === */
+.number-inputs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.number-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.number-btn {
+  background: var(--number-accent);
+}
+
+.number-btn:hover {
+  filter: brightness(1.1);
+}
+
+.number-result {
+  font-size: 64px;
+  font-weight: 800;
+  color: var(--number-accent);
+  min-height: 80px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.number-result.pop {
+  animation: numberPop 0.3s ease-out;
+}
+
+@keyframes numberPop {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 /* === Reduced Motion === */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {

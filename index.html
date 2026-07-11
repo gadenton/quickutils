@@ -67,7 +67,23 @@
 
       <!-- Random Number -->
       <section id="number" class="tool-section" aria-label="Random Number">
-        <!-- Populated in Task 4 -->
+        <h1 class="tool-title">Random Number</h1>
+        <p class="tool-subtitle">Pick a range, get a random integer</p>
+
+        <div class="number-inputs">
+          <div class="number-field">
+            <label for="num-min" class="control-label">Min</label>
+            <input id="num-min" class="input-field" type="number" value="1" inputmode="numeric">
+          </div>
+          <div class="number-field">
+            <label for="num-max" class="control-label">Max</label>
+            <input id="num-max" class="input-field" type="number" value="100" inputmode="numeric">
+          </div>
+        </div>
+
+        <button id="num-generate-btn" class="btn-primary number-btn">Generate</button>
+
+        <div id="num-result" class="number-result" aria-live="polite"></div>
       </section>
 
       <!-- Password Generator -->
