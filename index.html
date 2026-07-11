@@ -157,12 +157,12 @@
         <p id="pass-feedback" class="pass-feedback" aria-live="polite"></p>
       </section>
 
-      <!-- Picker & Narrowing Tool -->
-      <section id="picker" class="tool-section" aria-label="Picker and Narrowing Tool">
+      <!-- Picker & Elimination Tool -->
+      <section id="picker" class="tool-section" aria-label="Picker and Elimination Tool">
         <!-- Setup View -->
         <div id="picker-setup-view" class="picker-view active">
           <h1 class="tool-title">Picker</h1>
-          <p class="tool-subtitle">Enter options to pick or narrow down</p>
+          <p class="tool-subtitle">Enter options to pick or eliminate</p>
 
           <div class="seg-row" id="picker-input-mode-row">
             <button class="seg-btn active" id="picker-mode-list-btn" type="button">Add Items</button>
@@ -183,7 +183,8 @@
           </div>
 
           <div class="picker-action-buttons">
-            <button id="picker-narrow-start-btn" class="btn-primary" disabled type="button">3-2-1 Narrow</button>
+            <button id="picker-eliminate-start-btn" class="btn-primary" disabled type="button">Start
+              Elimination</button>
             <button id="picker-random-start-btn" class="btn-primary" disabled type="button">Random Pick</button>
           </div>
         </div>
@@ -200,17 +201,18 @@
           </div>
         </div>
 
-        <!-- Narrow View -->
-        <div id="picker-narrow-view" class="picker-view picker-hidden">
-          <h1 class="tool-title">3-2-1 Narrow</h1>
-          <p id="picker-narrow-player-turn" class="tool-subtitle">Player 1 Turn</p>
-          <div id="picker-narrow-instructions" class="picker-instructions">Select items to keep</div>
+        <!-- Elimination View -->
+        <div id="picker-eliminate-view" class="picker-view picker-hidden">
+          <h1 class="tool-title">Eliminator</h1>
+          <p id="picker-eliminate-player-turn" class="tool-subtitle">Player 1 Turn</p>
+          <div id="picker-eliminate-instructions" class="picker-instructions">Select items to eliminate</div>
 
-          <div id="picker-narrow-cards" class="picker-cards-grid"></div>
+          <div id="picker-eliminate-cards" class="picker-cards-grid"></div>
 
           <div class="picker-action-buttons">
-            <button id="picker-narrow-confirm-btn" class="btn-primary" disabled type="button">Confirm Selection</button>
-            <button id="picker-narrow-cancel-btn" class="btn-primary" type="button">Cancel</button>
+            <button id="picker-eliminate-confirm-btn" class="btn-primary" disabled type="button">Confirm
+              Elimination</button>
+            <button id="picker-eliminate-cancel-btn" class="btn-primary" type="button">Cancel</button>
           </div>
         </div>
 

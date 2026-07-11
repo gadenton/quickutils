@@ -109,7 +109,7 @@
   animation: pickerRoll 0.1s infinite alternate;
 }
 
-/* Narrow View Card Grid Styling */
+/* Elimination View Card Grid Styling */
 .picker-cards-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -133,11 +133,11 @@
   -webkit-tap-highlight-color: transparent;
 }
 
-.picker-card.selected {
-  border-color: var(--accent);
-  background: rgba(110, 90, 220, 0.15);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(110, 90, 220, 0.2);
+.picker-card.eliminated {
+  border-color: #ff4d4d;
+  background: rgba(255, 77, 77, 0.12);
+  text-decoration: line-through;
+  opacity: 0.75;
 }
 
 .picker-instructions {

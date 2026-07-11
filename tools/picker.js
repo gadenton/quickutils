@@ -8,7 +8,7 @@ export function init() {
   var pasteContainer = document.getElementById('picker-paste-container');
   var listContainer = document.getElementById('picker-list-container');
   var randomStartBtn = document.getElementById('picker-random-start-btn');
-  var narrowStartBtn = document.getElementById('picker-narrow-start-btn');
+  var eliminateStartBtn = document.getElementById('picker-eliminate-start-btn');
 
   var options = [];
 
@@ -29,7 +29,7 @@ export function init() {
 
   function updateButtons() {
     randomStartBtn.disabled = options.length < 1;
-    narrowStartBtn.disabled = options.length < 2;
+    eliminateStartBtn.disabled = options.length < 2;
   }
 
   function renderTags() {
@@ -108,7 +108,7 @@ export function init() {
   function showView(view) {
     setupView.classList.add('picker-hidden');
     randomView.classList.add('picker-hidden');
-    document.getElementById('picker-narrow-view').classList.add('picker-hidden');
+    document.getElementById('picker-eliminate-view').classList.add('picker-hidden');
     document.getElementById('picker-winner-view').classList.add('picker-hidden');
     view.classList.remove('picker-hidden');
   }
@@ -151,29 +151,29 @@ export function init() {
     showView(setupView);
   });
 
-  var narrowView = document.getElementById('picker-narrow-view');
-  var narrowPlayerTurn = document.getElementById('picker-narrow-player-turn');
-  var narrowInstructions = document.getElementById('picker-narrow-instructions');
-  var narrowCards = document.getElementById('picker-narrow-cards');
-  var narrowConfirmBtn = document.getElementById('picker-narrow-confirm-btn');
-  var narrowCancelBtn = document.getElementById('picker-narrow-cancel-btn');
+  var eliminateView = document.getElementById('picker-eliminate-view');
+  var eliminatePlayerTurn = document.getElementById('picker-eliminate-player-turn');
+  var eliminateInstructions = document.getElementById('picker-eliminate-instructions');
+  var eliminateCards = document.getElementById('picker-eliminate-cards');
+  var eliminateConfirmBtn = document.getElementById('picker-eliminate-confirm-btn');
+  var eliminateCancelBtn = document.getElementById('picker-eliminate-cancel-btn');
   
   var winnerView = document.getElementById('picker-winner-view');
   var winnerResult = document.getElementById('picker-winner-result');
   var winnerBackBtn = document.getElementById('picker-winner-back-btn');
 
-  var narrowState = {
+  var eliminateState = {
     pool: [],
-    targetKeep: 0,
+    targetEliminate: 0,
     player: 1,
     selectedIndices: []
   };
 
-  narrowStartBtn.addEventListener('click', function () {
-    startNarrowing();
+  eliminateStartBtn.addEventListener('click', function () {
+    startEliminating();
   });
 
-  narrowCancelBtn.addEventListener('click', function () {
+  eliminateCancelBtn.addEventListener('click', function () {
     showView(setupView);
   });
 
@@ -181,38 +181,33 @@ export function init() {
     showView(setupView);
   });
 
-  function startNarrowing() {
-    narrowState.pool = options.slice();
-    narrowState.player = 1;
-    setupNarrowStep();
-    showView(narrowView);
+  function startEliminating() {
+    eliminateState.pool = options.slice();
+    eliminateState.player = 1;
+    setupEliminateStep();
+    showView(eliminateView);
   }
 
-  function setupNarrowStep() {
-    var poolSize = narrowState.pool.length;
-    narrowState.selectedIndices = [];
-    narrowConfirmBtn.disabled = true;
+  function setupEliminateStep() {
+    var poolSize = eliminateState.pool.length;
+    eliminateState.selectedIndices = [];
+    eliminateConfirmBtn.disabled = true;
 
-    if (poolSize >= 4) {
-      narrowState.targetKeep = 3;
-    } else if (poolSize === 3) {
-      narrowState.targetKeep = 2;
-    } else if (poolSize === 2) {
-      narrowState.targetKeep = 1;
-    } else {
-      // 1 option left - should not happen as we catch it earlier, but handle gracefully
-      declareWinner(narrowState.pool[0]);
+    if (poolSize <= 1) {
+      declareWinner(eliminateState.pool[0]);
       return;
     }
 
-    narrowPlayerTurn.textContent = 'Player ' + narrowState.player + '\'s Turn';
-    narrowInstructions.textContent = 'Keep exactly ' + narrowState.targetKeep + ' of ' + poolSize + ' items';
-    renderNarrowCards();
+    eliminateState.targetEliminate = 1;
+
+    eliminatePlayerTurn.textContent = 'Player ' + eliminateState.player + '\'s Turn';
+    eliminateInstructions.textContent = 'Select 1 option to eliminate';
+    renderEliminateCards();
   }
 
-  function renderNarrowCards() {
-    narrowCards.innerHTML = '';
-    narrowState.pool.forEach(function (item, idx) {
+  function renderEliminateCards() {
+    eliminateCards.innerHTML = '';
+    eliminateState.pool.forEach(function (item, idx) {
       var card = document.createElement('div');
       card.className = 'picker-card';
       card.textContent = item;
@@ -221,39 +216,50 @@ export function init() {
         toggleCardSelection(idx, card);
       });
 
-      narrowCards.appendChild(card);
+      eliminateCards.appendChild(card);
     });
   }
 
   function toggleCardSelection(index, cardEl) {
-    var selectIdx = narrowState.selectedIndices.indexOf(index);
+    var selectIdx = eliminateState.selectedIndices.indexOf(index);
     if (selectIdx > -1) {
-      narrowState.selectedIndices.splice(selectIdx, 1);
-      cardEl.classList.remove('selected');
+      eliminateState.selectedIndices.splice(selectIdx, 1);
+      cardEl.classList.remove('eliminated');
     } else {
-      // Allow selecting up to targetKeep
-      if (narrowState.selectedIndices.length < narrowState.targetKeep) {
-        narrowState.selectedIndices.push(index);
-        cardEl.classList.add('selected');
+      // Allow selecting exactly 1 item. If another is already selected, swap them.
+      if (eliminateState.selectedIndices.length < 1) {
+        eliminateState.selectedIndices.push(index);
+        cardEl.classList.add('eliminated');
+      } else {
+        var oldIdx = eliminateState.selectedIndices[0];
+        eliminateState.selectedIndices = [index];
+        
+        var cards = eliminateCards.children;
+        if (cards[oldIdx]) {
+          cards[oldIdx].classList.remove('eliminated');
+        }
+        cardEl.classList.add('eliminated');
       }
     }
-    narrowConfirmBtn.disabled = (narrowState.selectedIndices.length !== narrowState.targetKeep);
+    eliminateConfirmBtn.disabled = (eliminateState.selectedIndices.length !== 1);
   }
 
-  narrowConfirmBtn.addEventListener('click', function () {
-    // Narrow pool to only selected indices
+  eliminateConfirmBtn.addEventListener('click', function () {
+    // Keep only the items NOT selected for elimination
     var newPool = [];
-    narrowState.selectedIndices.forEach(function (idx) {
-      newPool.push(narrowState.pool[idx]);
+    eliminateState.pool.forEach(function (item, idx) {
+      if (eliminateState.selectedIndices.indexOf(idx) === -1) {
+        newPool.push(item);
+      }
     });
-    narrowState.pool = newPool;
+    eliminateState.pool = newPool;
 
-    if (narrowState.pool.length <= 1) {
-      declareWinner(narrowState.pool[0]);
+    if (eliminateState.pool.length <= 1) {
+      declareWinner(eliminateState.pool[0]);
     } else {
-      // Alternate players: 1 -> 2, 2 -> 1
-      narrowState.player = narrowState.player === 1 ? 2 : 1;
-      setupNarrowStep();
+      // Alternate players
+      eliminateState.player = eliminateState.player === 1 ? 2 : 1;
+      setupEliminateStep();
     }
   });
 

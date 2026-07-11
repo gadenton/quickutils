@@ -8,7 +8,7 @@ A lightweight PWA for common utilities that LLM assistants can't easily perform.
 - 🎲 **Dice Roller** — Supports standard RPG dice (d4, d6, d8, d10, d12, d20) with configurable counts (1–6 dice).
 - 🪙 **Coin Flip** — Interactive animated coin flip with persistent session and lifetime stats.
 - 🔢 **Random Number** — Generate random integers within a customizable min/max range.
-- 🎯 **Picker & Narrowing** — Input options to either pick one at random or systematically narrow down choices using a 3-2-1 turn-based narrowing tournament.
+- 🎯 **Picker & Elimination** — Input options to either pick one at random or systematically eliminate options in a turn-based multiplayer elimination game.
 
 ## Features
 
