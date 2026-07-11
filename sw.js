@@ -1,4 +1,4 @@
-var CACHE_NAME = 'quickutils-20260711-102942';
+var CACHE_NAME = 'quickutils-20260711-103129';
 var ASSETS = [
   './',
   'index.html',
