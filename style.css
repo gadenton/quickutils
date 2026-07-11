@@ -205,3 +205,38 @@ main {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* === Material You / Standalone Mode Integration === */
+@media (display-mode: standalone) {
+  :root {
+    --accent: AccentColor;
+    --accent-hover: AccentColor;
+    --tab-active: AccentColor;
+    
+    /* Unified tool accents using Material You */
+    --dice-accent: AccentColor;
+    --number-accent: AccentColor;
+    --password-accent: AccentColor;
+    
+    --bg: Canvas;
+    --text-primary: CanvasText;
+    
+    /* Harmonize surfaces by mixing dynamic AccentColor into Canvas background */
+    --bg-surface: color-mix(in srgb, AccentColor 8%, Canvas);
+    --bg-elevated: color-mix(in srgb, AccentColor 14%, Canvas);
+    --border: color-mix(in srgb, AccentColor 15%, transparent);
+  }
+  
+  /* Guarantee proper text contrast on dynamic accent background */
+  .btn-primary {
+    color: AccentColorText;
+  }
+  .seg-btn.active {
+    color: AccentColorText;
+  }
+  .picker-card.selected {
+    border-color: var(--accent);
+    background: color-mix(in srgb, AccentColor 15%, transparent);
+    box-shadow: 0 4px 12px color-mix(in srgb, AccentColor 20%, transparent);
+  }
+}
