@@ -22,5 +22,20 @@
       "type": "image/png",
       "purpose": "any"
     }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/screenshot-mobile.jpg",
+      "sizes": "412x915",
+      "type": "image/jpeg",
+      "label": "QuickUtils on Mobile"
+    },
+    {
+      "src": "screenshots/screenshot-desktop.jpg",
+      "sizes": "2434x1215",
+      "type": "image/jpeg",
+      "form_factor": "wide",
+      "label": "QuickUtils on Desktop"
+    }
   ]
 }

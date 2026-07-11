@@ -1,4 +1,4 @@
-var CACHE_NAME = 'quickutils-20260710-231344';
+var CACHE_NAME = 'quickutils-20260710-232103';
 var ASSETS = [
   './',
   'index.html',
@@ -9,6 +9,8 @@ var ASSETS = [
   'pwa-install.css',
   'icons/icon-192.png',
   'icons/icon-512.png',
+  'screenshots/screenshot-mobile.jpg',
+  'screenshots/screenshot-desktop.jpg',
   'tools/coin.js',
   'tools/coin.css',
   'tools/dice.js',
