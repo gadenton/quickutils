@@ -18,7 +18,19 @@
     <main>
       <!-- Coin Flip -->
       <section id="coin" class="tool-section active" aria-label="Coin Flip">
-        <!-- Populated in Task 2 -->
+        <h1 class="tool-title">Coin Flip</h1>
+        <p class="tool-subtitle">Tap the coin to flip</p>
+
+        <div class="coin-container">
+          <button id="coin-btn" class="coin" aria-label="Flip coin">
+            <div class="coin-inner">
+              <div class="coin-face coin-heads">H</div>
+              <div class="coin-face coin-tails">T</div>
+            </div>
+          </button>
+        </div>
+
+        <p id="coin-result" class="result-text" aria-live="polite"></p>
       </section>
 
       <!-- Dice Roller -->
