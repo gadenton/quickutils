@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="tools/dice.css">
   <link rel="stylesheet" href="tools/number.css">
   <link rel="stylesheet" href="tools/password.css">
+  <link rel="stylesheet" href="tools/picker.css">
 </head>
 <body>
   <div class="app">
@@ -134,6 +135,72 @@
         <button id="pass-generate-btn" class="btn-primary password-btn">Generate</button>
         <p id="pass-feedback" class="pass-feedback" aria-live="polite"></p>
       </section>
+      
+      <!-- Picker & Narrowing Tool -->
+      <section id="picker" class="tool-section" aria-label="Picker and Narrowing Tool">
+        <!-- Setup View -->
+        <div id="picker-setup-view" class="picker-view active">
+          <h1 class="tool-title">Picker</h1>
+          <p class="tool-subtitle">Enter options to pick or narrow down</p>
+          
+          <div class="seg-row" id="picker-input-mode-row">
+            <button class="seg-btn active" id="picker-mode-paste-btn" type="button">Paste Text</button>
+            <button class="seg-btn" id="picker-mode-list-btn" type="button">Add Items</button>
+          </div>
+
+          <div id="picker-paste-container" class="picker-input-container">
+            <textarea id="picker-textarea" class="input-field" placeholder="Enter options, one per line..." rows="6"></textarea>
+          </div>
+
+          <div id="picker-list-container" class="picker-input-container picker-hidden">
+            <div class="picker-add-row">
+              <input type="text" id="picker-item-input" class="input-field" placeholder="Add an option...">
+              <button id="picker-add-btn" class="btn-primary" type="button">Add</button>
+            </div>
+            <div id="picker-tags-list" class="picker-tags-list"></div>
+          </div>
+
+          <div class="picker-action-buttons">
+            <button id="picker-random-start-btn" class="btn-primary" disabled type="button">Random Pick</button>
+            <button id="picker-narrow-start-btn" class="btn-primary" disabled type="button">3-2-1 Narrow</button>
+          </div>
+        </div>
+
+        <!-- Random View -->
+        <div id="picker-random-view" class="picker-view picker-hidden">
+          <h1 class="tool-title">Random Pick</h1>
+          <div class="picker-shuffle-container">
+            <div id="picker-random-shuffle" class="picker-shuffle-box">Press Pick</div>
+          </div>
+          <div class="picker-action-buttons">
+            <button id="picker-random-roll-btn" class="btn-primary" type="button">Pick Again</button>
+            <button id="picker-random-back-btn" class="btn-primary" type="button">Back to Setup</button>
+          </div>
+        </div>
+
+        <!-- Narrow View -->
+        <div id="picker-narrow-view" class="picker-view picker-hidden">
+          <h1 class="tool-title">3-2-1 Narrow</h1>
+          <p id="picker-narrow-player-turn" class="tool-subtitle">Player 1 Turn</p>
+          <div id="picker-narrow-instructions" class="picker-instructions">Select items to keep</div>
+          
+          <div id="picker-narrow-cards" class="picker-cards-grid"></div>
+
+          <div class="picker-action-buttons">
+            <button id="picker-narrow-confirm-btn" class="btn-primary" disabled type="button">Confirm Selection</button>
+            <button id="picker-narrow-cancel-btn" class="btn-primary" type="button">Cancel</button>
+          </div>
+        </div>
+
+        <!-- Winner View -->
+        <div id="picker-winner-view" class="picker-view picker-hidden">
+          <h1 class="tool-title">Winner!</h1>
+          <div class="picker-winner-container">
+            <div id="picker-winner-result" class="picker-winner-box"></div>
+          </div>
+          <button id="picker-winner-back-btn" class="btn-primary" type="button">Done</button>
+        </div>
+      </section>
     </main>
 
     <nav class="tab-bar" aria-label="Tool navigation">
@@ -152,6 +219,10 @@
       <button data-tab="password">
         <span class="tab-icon">🔑</span>
         <span>Password</span>
+      </button>
+      <button data-tab="picker">
+        <span class="tab-icon">🎯</span>
+        <span>Picker</span>
       </button>
     </nav>
   </div>

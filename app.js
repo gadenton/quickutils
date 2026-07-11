@@ -2,6 +2,7 @@ import * as coin from './tools/coin.js';
 import * as dice from './tools/dice.js';
 import * as number from './tools/number.js';
 import * as password from './tools/password.js';
+import * as picker from './tools/picker.js';
 
 (function () {
   'use strict';
@@ -32,6 +33,7 @@ import * as password from './tools/password.js';
   dice.init();
   number.init();
   password.init();
+  picker.init();
 
   // --- Service Worker Registration ---
   if ('serviceWorker' in navigator) {
